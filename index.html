@@ -1,0 +1,982 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flashdance | École de danse et fitness à Herstal, Ans, Fexhe-Slins et Liers</title>
+<meta name="description" content="Flashdance, école de danse et de fitness : Baby Dance, Hip Hop, Ragga, Commercial, Zumba et plus. Cours pour tous les âges et tous les niveaux à Herstal, Ans, Fexhe-Slins et Liers.">
+<meta name="theme-color" content="#1A0D2E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_BE">
+<meta property="og:title" content="Flashdance | Dansez. Vivez. Brillez.">
+<meta property="og:description" content="Danse et fitness pour tous les âges, tous les niveaux. Réservez votre cours d'essai.">
+<!-- DEPLOY STEP: patch og:image and og:url with the live absolute URLs before zipping -->
+<meta property="og:image" content="assets/hero-ending.jpg">
+<meta property="og:url" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231A0D2E'/%3E%3Cpath d='M14 46V18h22v7H22v4h12v7H22v10zM38 18h8c9 0 14 5 14 14s-5 14-14 14h-8z' fill='none'/%3E%3Ctext x='32' y='44' font-family='Impact,Arial Narrow,sans-serif' font-size='30' font-weight='900' text-anchor='middle' fill='%23FF2E93'%3EFD%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=DM+Sans:wght@400;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#1A0D2E;
+  --panel:#27153F;
+  --panel-2:#321B4F;
+  --accent:#FF2E93;
+  --accent-hover:#FF5CAB;
+  --accent-muted:rgba(255,46,147,.35);
+  --spark:#C6F53C;
+  --text-secondary:#CDBDE6;
+  --text-primary:#FBF5FF;
+  --line:#6B4D93;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease2:cubic-bezier(.65,0,.35,1);
+  --tshadow:0 1px 2px rgba(5,5,10,.95),0 3px 12px rgba(5,5,10,.78),0 10px 44px rgba(5,5,10,.8);
+  --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Space Mono',ui-monospace,Menlo,Consolas,monospace;
+  --gutter:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:76px;background:var(--canvas)}
+body{overflow-x:hidden;overflow-x:clip;background:transparent;color:var(--text-primary);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--accent);color:var(--canvas);padding:10px 16px;border-radius:8px;z-index:200;font-weight:600;transition:top .3s var(--ease)}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
+
+/* one environment: a fixed slow-drifting glow behind everything */
+.env{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--canvas)}
+.env::before,.env::after{content:"";position:absolute;width:90vmax;height:90vmax;border-radius:50%;opacity:.5;will-change:transform}
+.env::before{left:-30vmax;top:-30vmax;background:radial-gradient(circle,rgba(255,46,147,.22) 0,rgba(255,46,147,0) 62%);animation:drift1 80s linear infinite alternate;animation-delay:-20s}
+.env::after{right:-35vmax;bottom:-35vmax;background:radial-gradient(circle,rgba(150,70,255,.26) 0,rgba(150,70,255,0) 62%);animation:drift2 96s linear infinite alternate;animation-delay:-40s}
+.env i{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--spark);opacity:.0;animation:sparkle 9s ease-in-out infinite}
+.env i:nth-child(1){left:12%;top:70%;animation-delay:-1.2s}
+.env i:nth-child(2){left:28%;top:30%;animation-delay:-4.6s;animation-duration:11s}
+.env i:nth-child(3){left:47%;top:82%;animation-delay:-7.1s}
+.env i:nth-child(4){left:63%;top:22%;animation-delay:-2.8s;animation-duration:13s}
+.env i:nth-child(5){left:79%;top:58%;animation-delay:-5.9s}
+.env i:nth-child(6){left:91%;top:88%;animation-delay:-8.4s;animation-duration:10s}
+@keyframes drift1{to{transform:translate3d(30vmax,24vmax,0)}}
+@keyframes drift2{to{transform:translate3d(-26vmax,-22vmax,0)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:translate3d(0,0,0)}40%{opacity:.5}70%{opacity:.18;transform:translate3d(14px,-46px,0)}}
+
+/* navigation */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px var(--gutter);background:linear-gradient(180deg,rgba(26,13,46,.92),rgba(26,13,46,0));}
+.logo{font-family:var(--display);font-weight:900;font-size:1.7rem;letter-spacing:.04em;text-decoration:none;text-transform:uppercase;line-height:1;display:flex;align-items:baseline;gap:.35em;text-shadow:var(--tshadow)}
+.logo b{color:var(--accent);font-weight:900}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+.nav-links a{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--text-primary);text-shadow:var(--tshadow);transition:color .3s var(--ease)}
+.nav-links a:hover{color:var(--accent-hover)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;background:var(--accent);color:var(--canvas);font-weight:600;font-size:1.02rem;letter-spacing:.01em;padding:.95em 1.7em;border-radius:999px;border:0;text-decoration:none;text-shadow:none;position:relative;isolation:isolate;transition:background .3s var(--ease),transform .3s var(--ease)}
+.btn::before{content:"";position:absolute;inset:-6px;border-radius:inherit;background:var(--accent);filter:blur(16px);opacity:.0;z-index:-1;transition:opacity .4s var(--ease)}
+.btn:hover{background:var(--accent-hover)}
+.btn:hover::before{opacity:.55}
+.nav .btn{padding:.6em 1.2em;font-size:.92rem}
+.nav-links .btn,.nav-links a.btn{color:var(--canvas);text-shadow:none}
+.nav-links a.btn:hover{color:var(--canvas)}
+.burger{display:none;background:rgba(8,8,15,.55);border:1px solid rgba(160,130,200,.5);border-radius:10px;width:44px;height:44px;align-items:center;justify-content:center}
+.burger span{display:block;width:20px;height:2px;background:var(--text-primary);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--text-primary)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+
+/* hero */
+.hero{position:relative;height:560vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--canvas)}
+.poster,.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center}
+.stage video{opacity:0;transition:opacity .8s var(--ease);will-change:transform;transform:translateZ(0)}
+.stage.video-ready video{opacity:1}
+.stage.video-failed video{display:none}
+.stage.video-failed.late .poster{background-image:url('assets/hero-ending.jpg')!important}
+.scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,10,18,0) 35%,rgba(10,10,18,.62) 100%)}
+.band{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:0 var(--gutter) clamp(70px,13vh,140px);opacity:0;visibility:hidden;text-shadow:var(--tshadow);--k:0}
+.band.vis-on{visibility:visible}
+.band::before{content:"";position:absolute;inset:-4%;pointer-events:none;opacity:calc(.25 + .75*var(--k,1));background:radial-gradient(ellipse 72% 60% at 38% 74%,rgba(5,5,10,.86) 0%,rgba(5,5,10,.78) 54%,rgba(5,5,10,0) 86%)}
+.band>*{position:relative}
+.band.center{justify-content:center;align-items:center;text-align:center;padding-bottom:6vh}
+.band.center::before{background:radial-gradient(ellipse 60% 56% at 50% 46%,rgba(5,5,10,.7) 0%,rgba(5,5,10,.46) 46%,rgba(5,5,10,0) 78%)}
+.h{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.92;letter-spacing:.01em;font-size:clamp(3.4rem,10.5vw,9.4rem)}
+.m-blur .h,.m-drift .h{font-size:clamp(3rem,8.2vw,7.4rem);max-width:8.2em}
+.band .sub{font-size:clamp(1.05rem,1.7vw,1.5rem);max-width:34ch;margin-top:.9rem;color:var(--text-primary)}
+.band .btn{margin-top:1.6rem}
+.band .btn::before{display:none}
+.vis{display:inline-block}
+.w{display:inline-block;white-space:nowrap}
+/* band 1: scatter */
+.m-scatter .c{display:inline-block;--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px))) rotate(calc((1 - var(--kc))*var(--jr,0deg)))}
+.m-scatter .sp{display:inline-block;width:.28em}
+/* band 2: blur to sharp */
+.m-blur .vis{display:inline-grid}
+.m-blur .soft,.m-blur .sharp{grid-area:1/1}
+.m-blur .soft{filter:blur(10px);opacity:calc(1 - var(--k,0))}
+.m-blur .sharp{opacity:var(--k,0)}
+.m-blur + .sub,.band .sub{opacity:1}
+.m-blur ~ .sub{opacity:clamp(0,(var(--k,0) - .35)*2.2,1)}
+/* band 3: drift down */
+.m-drift .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-26px))}
+.m-drift ~ .sub{opacity:clamp(0,(var(--k,0) - .4)*2.4,1)}
+/* band 4: rise and settle */
+.m-rise .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*.5em))}
+.m-rise ~ .sub{--ks:clamp(0,(var(--k,0) - .66)*4,1);opacity:var(--ks);transform:translateY(calc((1 - var(--ks))*14px))}
+.m-rise ~ .btn{--kb:clamp(0,(var(--k,0) - .78)*5,1);opacity:var(--kb);transform:translateY(calc((1 - var(--kb))*14px))}
+.band.center .sub{max-width:40ch}
+
+.ring{position:absolute;left:50%;bottom:34px;width:34px;height:34px;margin-left:-17px;color:var(--accent);transform:rotate(-90deg);transition:opacity .5s var(--ease)}
+.ring circle{transition:stroke-dashoffset .2s linear}
+.stage.video-ready .ring{opacity:0}
+.cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:none}
+.stage.video-failed .cue{display:block}
+.chip{background:rgba(8,8,15,.55);border:1px solid rgba(160,130,200,.45);border-radius:10px;backdrop-filter:blur(10px);text-shadow:0 1px 3px rgba(5,5,10,.85);padding:.35em .8em}
+.static-copy{display:none}
+
+/* portrait screens: the wide video sits in a band across the middle and fades into the canvas, so the whole action stays in view */
+@media (max-aspect-ratio:4/5){
+  .poster,.stage video{inset:auto 0 auto 0;top:9svh;height:60svh;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%)}
+}
+/* static hero, matched exactly in JS GATES (reduced motion only) */
+@media (prefers-reduced-motion:reduce){
+  .hero{height:auto}
+  .stage{position:relative;height:auto;min-height:100vh;min-height:100svh;display:flex;background:var(--canvas) url('assets/hero-ending.jpg') center/cover no-repeat}
+  .stage video,.poster,.band,.ring,.cue{display:none!important}
+  .scrim{background:linear-gradient(180deg,rgba(10,10,18,.55) 0%,rgba(10,10,18,.2) 38%,rgba(10,10,18,.7) 100%)}
+  .static-copy{display:flex;position:relative;z-index:2;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:110px var(--gutter) 90px;margin:auto;text-shadow:var(--tshadow);width:100%}
+  .static-copy .h{font-size:clamp(3.2rem,15vw,6rem)}
+  .static-copy p{margin-top:1rem;font-size:1.15rem;max-width:30ch}
+  .static-copy .btn{margin-top:1.8rem}
+}
+@media (max-height:560px){.cue,.chip.hud{display:none}}
+
+/* sections */
+.sec{position:relative;padding:clamp(72px,11vw,140px) var(--gutter)}
+.wrap{max-width:1240px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--spark);display:flex;align-items:center;gap:.7em;margin-bottom:1rem}
+.kicker::before{content:"";width:26px;height:2px;background:var(--spark);opacity:.8}
+.t2{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.95;font-size:clamp(2.6rem,6.4vw,5.4rem);letter-spacing:.01em;text-shadow:0 2px 18px rgba(10,5,20,.65)}
+.kicker,.lede,.venue,.ev,.closing{text-shadow:0 1px 10px rgba(10,5,20,.7)}
+.lede{color:var(--text-secondary);max-width:52ch;margin-top:1rem}
+.js .sec .rv{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i,0)*90ms)}
+.js .sec.in .rv{opacity:1;transform:none}
+.js .sec.in.done .rv{transition-delay:0s}
+
+/* proof strip */
+.proof{padding:clamp(34px,5vw,56px) var(--gutter);background:linear-gradient(180deg,rgba(39,21,63,.0),rgba(39,21,63,.85) 30%,rgba(39,21,63,.85) 70%,rgba(39,21,63,0))}
+.proof ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,40px);max-width:1240px;margin:0 auto}
+.proof li{border-left:2px solid var(--accent-muted);padding-left:16px}
+.proof strong{display:block;font-family:var(--display);font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.03em}
+.proof span{color:var(--text-secondary);font-size:.95rem;line-height:1.45;display:block;margin-top:.3rem}
+
+/* cours */
+.cours{overflow:hidden}
+.cours .bg{position:absolute;inset:0;z-index:-1;background:url('assets/still-studio.jpg') center/cover no-repeat;opacity:.85}
+.cours .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--canvas) 18%,rgba(26,13,46,.35) 60%,var(--canvas) 100%),linear-gradient(180deg,var(--canvas),rgba(26,13,46,0) 20%,rgba(26,13,46,0) 80%,var(--canvas))}
+.cours-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:start}
+.cours-title{position:sticky;top:110px}
+.pills-block+.pills-block{margin-top:2.2rem}
+.pills-block h3{font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:.9rem;font-weight:400}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{background:rgba(39,21,63,.82);border:1px solid var(--line);border-radius:14px;padding:.6em 1em;display:inline-flex;flex-direction:column;line-height:1.25;transition:border-color .3s var(--ease),box-shadow .3s var(--ease);backdrop-filter:blur(6px)}
+.pill:hover{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-muted)}
+.pill b{font-family:var(--display);font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:.03em}
+.pill small{color:var(--text-secondary);font-size:.82rem}
+.draw{position:absolute;left:0;top:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible}
+.draw path{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;opacity:.5}
+
+/* horaires */
+.horaires{background:linear-gradient(180deg,rgba(39,21,63,0),rgba(39,21,63,.72) 12%,rgba(39,21,63,.72) 88%,rgba(39,21,63,0))}
+.filters{display:flex;flex-wrap:wrap;gap:10px 24px;margin:2rem 0 1.6rem;align-items:center}
+.fgroup{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fchip{background:transparent;border:1px solid var(--line);border-radius:999px;padding:.45em 1.05em;font-size:.92rem;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease)}
+.fchip:hover{border-color:var(--accent-hover)}
+.fchip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--canvas);font-weight:600}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.day{background:var(--panel);border:1px solid rgba(107,77,147,.55);border-radius:18px;padding:18px 18px 8px}
+.day h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.8rem;letter-spacing:.03em;margin-bottom:.5rem}
+.slot{display:grid;grid-template-columns:64px 1fr;gap:4px 12px;padding:.7rem 0;border-top:1px solid rgba(107,77,147,.5);align-items:baseline}
+.slot .t{font-family:var(--mono);font-size:.9rem;color:var(--spark)}
+.slot .n{font-weight:600}
+.slot .m{grid-column:2;color:var(--text-secondary);font-size:.88rem;line-height:1.35}
+.empty{color:var(--text-secondary);padding:.5rem 0 1rem}
+.hnote{margin-top:1.4rem;color:var(--text-secondary);font-size:.95rem}
+
+/* equipe */
+.team{overflow:hidden}
+.team-head{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,48px)}
+.hold-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.hold{--hp:0;position:relative;overflow:hidden;background:var(--panel-2);border:2px solid var(--accent);border-radius:999px;padding:1em 1.8em;font-weight:600;min-width:min(100%,300px);touch-action:none;user-select:none;-webkit-user-select:none;isolation:isolate}
+.hold::before{content:"";position:absolute;inset:0;background:var(--accent);transform-origin:left center;transform:scaleX(var(--hp));z-index:-1}
+.hold span{position:relative;mix-blend-mode:normal}
+.hold[data-done="1"]{border-color:var(--spark)}
+.hold-alt{background:none;border:0;color:var(--text-secondary);font-size:.85rem;text-decoration:underline;text-underline-offset:3px;padding:6px 0}
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px}
+.prof{position:relative;border-radius:16px;opacity:.26;transform:translateY(12px) scale(.985);transition:opacity .9s var(--ease2),transform .9s var(--ease2);transition-delay:calc(var(--n,0)*110ms)}
+.prof img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px}
+.prof::after{content:"";position:absolute;inset:0;border-radius:16px;box-shadow:0 0 34px 2px var(--accent-muted),inset 0 0 0 2px rgba(255,46,147,.7);opacity:0;pointer-events:none;transition:opacity .9s var(--ease2);transition-delay:calc(var(--n,0)*110ms)}
+.team.lit .prof{opacity:1;transform:none}
+.team.lit .prof::after{opacity:.9;animation:glow 5s ease-in-out infinite;animation-delay:-1.4s}
+@keyframes glow{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* tarifs */
+.tarifs{overflow:hidden}
+.tarifs .bg{position:absolute;inset:0;z-index:-1;background:url('assets/still-bokeh.jpg') center/cover no-repeat;opacity:.8}
+.tarifs .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--canvas),rgba(26,13,46,.5) 25%,rgba(26,13,46,.5) 75%,var(--canvas))}
+.ins{display:inline-flex;gap:.8em;align-items:baseline;background:rgba(8,8,15,.55);border:1px solid rgba(160,130,200,.45);border-radius:14px;padding:.7em 1.1em;margin:1.6rem 0 2rem;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.ins b{color:var(--accent);font-family:var(--display);font-size:1.7rem;font-weight:900;line-height:1}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,32px)}
+.plan{background:rgba(39,21,63,.9);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3vw,34px);backdrop-filter:blur(8px)}
+.plan h3{font-family:var(--display);font-weight:900;font-size:2.1rem;text-transform:uppercase;margin-bottom:.4rem}
+.plan h4{font-family:var(--mono);font-weight:400;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--spark);margin:1.3rem 0 .3rem}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:.55rem 0;border-bottom:1px dashed rgba(160,130,200,.35)}
+.row:last-of-type{border-bottom:0}
+.row .pr{font-family:var(--display);font-weight:800;font-size:1.5rem;white-space:nowrap}
+.row .pr small{font-family:var(--body);font-size:.8rem;color:var(--text-secondary);font-weight:400}
+.plan p.note{color:var(--text-secondary);font-size:.9rem;margin-top:.8rem}
+.fine{margin-top:1.2rem;color:var(--text-secondary);font-size:.88rem}
+
+/* dates */
+.dates .wrap{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,5vw,72px)}
+.timeline{list-style:none;position:relative}
+.timeline::before{content:"";position:absolute;left:92px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--accent),var(--spark));opacity:.45}
+.ev{display:grid;grid-template-columns:78px 1fr;gap:0 36px;padding:1.1rem 0;position:relative;align-items:center}
+.ev::after{content:"";position:absolute;left:87px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--canvas);border:2px solid var(--accent)}
+.ev .d{text-align:right;line-height:1}
+.ev .d b{display:block;font-family:var(--display);font-weight:900;font-size:2.7rem}
+.ev .d span{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary)}
+.ev h3{font-family:var(--display);font-weight:800;font-size:1.8rem;text-transform:uppercase;line-height:1}
+.ev p{color:var(--text-secondary);font-size:.95rem}
+.ev.past{opacity:.5}
+.ev .tag{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:.1em .7em;margin-left:.6em;vertical-align:middle;color:var(--text-secondary)}
+.closing{font-family:var(--display);font-weight:800;font-size:1.5rem;text-transform:uppercase;margin-top:1.6rem;color:var(--accent-hover)}
+
+/* lieux */
+.lieux,.dates{overflow:hidden}
+.lieux .bg,.dates .bg{position:absolute;inset:0;z-index:-1;background:center/cover no-repeat;opacity:.8}
+.lieux .bg{background-image:url('assets/still-sporthall.jpg')}
+.dates .bg{background-image:url('assets/still-party.jpg')}
+.lieux .bg::after,.dates .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--canvas),rgba(26,13,46,.62) 22%,rgba(26,13,46,.68) 78%,var(--canvas))}
+.lieux .bg{opacity:.5}
+.lieux .bg::after{background:linear-gradient(180deg,var(--canvas),rgba(26,13,46,.74) 20%,rgba(26,13,46,.78) 80%,var(--canvas))}
+.lieux .venue h3,.lieux .venue .p{text-shadow:0 1px 14px rgba(8,4,16,.85),0 0 3px rgba(8,4,16,.7)}
+.lieux .venue .p small{color:var(--text-primary)}
+.venues{margin-top:2.4rem;border-top:1px solid var(--line)}
+.venue{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr) auto;gap:8px 30px;padding:1.5rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.venue h3{font-family:var(--display);font-weight:900;font-size:clamp(2.2rem,5vw,3.8rem);text-transform:uppercase;line-height:.95}
+.venue .p{font-weight:600}
+.venue .p small{display:block;color:var(--text-secondary);font-weight:400;font-size:.92rem}
+.venue .new{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--spark);color:var(--canvas);padding:.25em .8em;border-radius:999px;justify-self:end}
+
+/* faq */
+.faq .wrap{max-width:900px}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;padding:1.2rem 3rem 1.2rem 0;font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3.2vw,2.1rem);text-transform:uppercase;line-height:1.05;position:relative}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:4px;top:50%;margin-top:-.6em;font-size:1.8rem;color:var(--accent);transition:transform .4s var(--ease)}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa p{color:var(--text-secondary);padding:0 0 1.3rem;max-width:62ch}
+
+/* cta */
+.essai{overflow:hidden;text-align:center}
+.essai{padding-top:calc(33vw + 24px)}
+.essai .bg{position:absolute;left:0;right:0;top:0;aspect-ratio:1920/800;z-index:-1;background:url('assets/essai-logo.jpg') center/100% 100% no-repeat}
+.essai .bg{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 58%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 58%,transparent 100%)}
+.essai .t2{font-size:clamp(3.4rem,10vw,8rem)}
+.essai .lede{margin-left:auto;margin-right:auto;color:var(--text-primary)}
+.cta-row{margin-top:2.4rem;display:flex;justify-content:center;gap:14px 18px;flex-wrap:wrap}
+.cta-row .btn{min-width:230px}
+.cta-row .btn svg{width:1.25em;height:1.25em;flex:none}
+.btn.alt{background:rgba(26,13,46,.7);color:var(--text-primary);box-shadow:inset 0 0 0 1.5px var(--text-primary)}
+.btn.alt:hover{background:var(--text-primary);color:var(--canvas)}
+.contact{margin-top:2.2rem;display:flex;justify-content:center;gap:12px 32px;flex-wrap:wrap}
+.contact a{font-family:var(--display);font-weight:800;font-size:1.7rem;text-decoration:none;letter-spacing:.03em;transition:color .3s var(--ease)}
+.contact a:hover{color:var(--accent-hover)}
+
+/* footer */
+footer{padding:44px var(--gutter) 34px;border-top:1px solid var(--line);background:var(--canvas)}
+.foot{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+.foot .logo{font-size:2.1rem;text-shadow:none}
+.foot p,.foot li{color:var(--text-secondary);font-size:.95rem}
+.foot ul{list-style:none;display:grid;gap:6px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--accent-hover)}
+.legal{max-width:1240px;margin:28px auto 0;color:var(--text-secondary);font-size:.82rem;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
+
+@media (max-width:960px){
+  .nav-links{position:fixed;top:64px;left:var(--gutter);right:var(--gutter);flex-direction:column;align-items:stretch;gap:0;background:rgba(26,13,46,.97);border:1px solid var(--line);border-radius:16px;padding:10px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s}
+  .nav.open .nav-links{opacity:1;visibility:visible;transform:none}
+  .nav-links a{padding:14px 12px;font-size:.82rem}
+  .nav-links .btn{margin-top:6px}
+  .burger{display:inline-flex}
+  .cours-grid,.dates .wrap,.plans,.foot{grid-template-columns:1fr}
+  .cours-title{position:static}
+  .proof ul{grid-template-columns:1fr 1fr}
+  .venue{grid-template-columns:1fr;gap:6px}
+  .venue .new{justify-self:start}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .proof ul{grid-template-columns:1fr}
+  .timeline::before{left:70px}
+  .ev{grid-template-columns:56px 1fr;gap:0 28px}
+  .ev::after{left:65px}
+  .ev .d b{font-size:2.2rem}
+  .slot{grid-template-columns:58px 1fr}
+  .row .pr{font-size:1.3rem}
+}
+@media (pointer:coarse){
+  .btn,.fchip,.hold,.hold-alt,.burger,.nav-links a{min-height:44px}
+  .fchip{display:inline-flex;align-items:center}
+  .hold,.btn{display:inline-flex;align-items:center;justify-content:center}
+  .nav-links a{display:flex;align-items:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important;scroll-behavior:auto!important}
+  .js .sec .rv{opacity:1!important;transform:none!important}
+  .prof{opacity:1!important;transform:none!important}
+  .prof::after{opacity:.6!important}
+  .hold-wrap{display:none}
+  .env i{opacity:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="env" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Flashdance, accueil"><b>FD</b> Flashdance</a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span></button>
+  <nav class="nav-links" id="menu" aria-label="Navigation principale">
+    <a href="#cours">Cours</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#equipe">Équipe</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#dates">Dates</a>
+    <a href="#lieux">Lieux</a>
+    <a class="btn" href="#essai">Cours d'essai</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="hero" id="top" aria-label="Flashdance">
+  <div class="stage" id="stage">
+    <div class="poster" id="poster"></div>
+    <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+    <div class="scrim"></div>
+
+    <div class="band" data-a="0" data-b="0.24" data-mode="scatter" data-ramp="0.035">
+      <h1 class="h" data-split>Dansez. Vivez. Brillez.</h1>
+    </div>
+    <div class="band" data-a="0.28" data-b="0.52" data-mode="blur" data-ramp="0.04">
+      <h2 class="h" data-split>Pas besoin d'être prêt(e).</h2>
+      <p class="sub">Juste d'oser le premier pas.</p>
+    </div>
+    <div class="band" data-a="0.56" data-b="0.78" data-mode="drift" data-ramp="0.04">
+      <h2 class="h" data-split>Quatre villes. Une seule scène.</h2>
+      <p class="sub">Herstal, Ans, Fexhe-Slins, Liers.</p>
+    </div>
+    <div class="band center" data-a="0.84" data-b="1" data-mode="rise" data-ramp="0.07">
+      <h2 class="h" data-split>Votre tour.</h2>
+      <p class="sub">Danse et fitness pour tous les âges, tous les niveaux.</p>
+      <a class="btn" href="#essai">Réserver mon cours d'essai</a>
+    </div>
+
+    <svg class="ring" id="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
+    <div class="cue chip mono" aria-hidden="true">Défilez</div>
+
+    <div class="static-copy">
+      <h1 class="h" id="static-h">Dansez. Vivez. Brillez.</h1>
+      <p>Danse et fitness à Herstal, Ans, <span style="white-space:nowrap">Fexhe-Slins</span> et Liers.</p>
+      <a class="btn" href="#essai">Réserver mon cours d'essai</a>
+    </div>
+  </div>
+</section>
+
+<section class="proof" aria-label="Nos engagements">
+  <ul>
+    <li><strong>Des cours variés</strong><span>Pour tous les goûts et tous les niveaux.</span></li>
+    <li><strong>Développement et plaisir</strong><span>Exprimez-vous, progressez et prenez confiance en vous !</span></li>
+    <li><strong>Ambiance bienveillante</strong><span>Respect, partage et bonne humeur au rendez-vous !</span></li>
+    <li><strong>Passionnées</strong><span>Un encadrement de qualité pour révéler votre talent !</span></li>
+  </ul>
+</section>
+
+<section class="sec cours" id="cours">
+  <div class="bg" aria-hidden="true"></div>
+  <svg class="draw" id="draw1" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 140 C 220 40, 380 260, 560 170 S 900 -10, 1220 230"/></svg>
+  <div class="wrap cours-grid">
+    <div class="cours-title">
+      <p class="kicker rv" style="--i:0">Les cours</p>
+      <h2 class="t2 rv" style="--i:1">Un cours pour chaque envie.</h2>
+      <p class="lede rv" style="--i:2">De la danse dès 3 ans au fitness pour adultes, chacun trouve son rythme. On commence là où vous en êtes.</p>
+    </div>
+    <div>
+      <div class="pills-block rv" style="--i:2">
+        <h3>Danse</h3>
+        <div class="pills">
+          <span class="pill"><b>Baby Dance</b><small>3 à 5 ans</small></span>
+          <span class="pill"><b>Zumba Kids</b><small>+6 ans</small></span>
+          <span class="pill"><b>Ragga</b><small>+6 ans, +10 ans, ados, enfants</small></span>
+          <span class="pill"><b>Hip Hop</b><small>+10 ans, ados</small></span>
+          <span class="pill"><b>Commercial</b><small>+6 ans, +10 ans, ados/adultes</small></span>
+          <span class="pill"><b>Classique</b><small>enfants</small></span>
+          <span class="pill"><b>Jazz / Contempo</b><small>+6 ans</small></span>
+          <span class="pill"><b>Contempo</b><small>+10 ans</small></span>
+          <span class="pill"><b>Dancehall</b><small>ados/adultes</small></span>
+          <span class="pill"><b>Girly Heels</b><small>+16 ans</small></span>
+          <span class="pill"><b>Girly</b><small>enfants</small></span>
+          <span class="pill"><b>Starmoves</b><small>+6 ans, adultes</small></span>
+        </div>
+      </div>
+      <div class="pills-block rv" style="--i:3">
+        <h3>Fitness</h3>
+        <div class="pills">
+          <span class="pill"><b>Zumba</b><small>tous niveaux</small></span>
+          <span class="pill"><b>Zumba Gold</b><small>tarif préférentiel</small></span>
+          <span class="pill"><b>Aqua Zumba</b><small>au Wellness Post Hôtel</small></span>
+          <span class="pill"><b>Step</b><small>à Liers</small></span>
+          <span class="pill"><b>Zumba + Lift</b><small>à Herstal</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec horaires" id="horaires">
+  <div class="wrap">
+    <p class="kicker rv" style="--i:0">La semaine</p>
+    <h2 class="t2 rv" style="--i:1">Trouvez votre créneau.</h2>
+    <div class="filters rv" style="--i:2">
+      <div class="fgroup" role="group" aria-label="Choisir une ville" id="f-ville"></div>
+      <div class="fgroup" role="group" aria-label="Choisir un type de cours" id="f-type"></div>
+    </div>
+    <div class="days" id="days" aria-live="polite"></div>
+    <p class="hnote rv" style="--i:3">Un doute sur le bon cours ? Écrivez-nous, on vous dit lequel essayer en premier.</p>
+  </div>
+</section>
+
+<section class="sec team" id="equipe">
+  <div class="wrap">
+    <div class="team-head">
+      <div>
+        <p class="kicker rv" style="--i:0">Les profs</p>
+        <h2 class="t2 rv" style="--i:1">Neuf profs.<br>Une seule énergie.</h2>
+      </div>
+      <div class="hold-wrap rv" style="--i:2">
+        <button class="hold" id="hold" type="button" aria-describedby="hold-help"><span id="hold-label">Maintenez pour allumer la salle</span></button>
+        <button class="hold-alt" id="hold-alt" type="button">Ou tout allumer d'un clic</button>
+        <p class="sr" id="hold-help">Maintenez le bouton enfoncé, ou appuyez longtemps sur la barre d'espace, pour révéler les profs un à un.</p>
+      </div>
+    </div>
+    <div class="prof-grid" id="profs">
+      <div class="prof" style="--n:0"><img src="assets/prof-solange.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Solange, prof chez Flashdance"></div>
+      <div class="prof" style="--n:1"><img src="assets/prof-laurence.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Laurence, prof chez Flashdance"></div>
+      <div class="prof" style="--n:2"><img src="assets/prof-alyssa.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait d'Alyssa, prof chez Flashdance"></div>
+      <div class="prof" style="--n:3"><img src="assets/prof-jude.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Jude, prof chez Flashdance"></div>
+      <div class="prof" style="--n:4"><img src="assets/prof-daniela.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Daniela, prof chez Flashdance"></div>
+      <div class="prof" style="--n:5"><img src="assets/prof-diemelo.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Diemelo, prof chez Flashdance"></div>
+      <div class="prof" style="--n:6"><img src="assets/prof-caroline.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Caroline, prof chez Flashdance"></div>
+      <div class="prof" style="--n:7"><img src="assets/prof-morgane.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait de Morgane, prof chez Flashdance"></div>
+      <div class="prof" style="--n:8"><img src="assets/prof-emma.jpg" width="720" height="720" loading="lazy" decoding="async" alt="Portrait d'Emma, prof chez Flashdance"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tarifs" id="tarifs">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker rv" style="--i:0">Les tarifs</p>
+    <h2 class="t2 rv" style="--i:1">Clair, sans surprise.</h2>
+    <div class="ins rv" style="--i:2"><span>Assurance et inscription annuelle obligatoire</span><b>25 €</b></div>
+    <div class="plans">
+      <article class="plan rv" style="--i:3">
+        <h3>Cours de danse</h3>
+        <h4>Paiement annuel</h4>
+        <div class="row"><span>1 cours</span><span class="pr">200 €</span></div>
+        <div class="row"><span>2 cours</span><span class="pr">350 €</span></div>
+        <div class="row"><span>3 cours et +</span><span class="pr">450 €*</span></div>
+        <h4>Paiement en 3 fois</h4>
+        <div class="row"><span>1 cours</span><span class="pr">3 × 75 €</span></div>
+        <div class="row"><span>2 cours</span><span class="pr">3 × 125 €</span></div>
+        <div class="row"><span>3 cours et +</span><span class="pr">3 × 160 €*</span></div>
+        <p class="note">Paiements : du 14/09 au 06/12, du 07/12 au 28/02, du 01/03 au 31/05. L'abonnement Full Access Danse donne aussi accès à tous les cours fitness.</p>
+      </article>
+      <article class="plan rv" style="--i:4">
+        <h3>Cours fitness</h3>
+        <h4>Cours d'essai</h4>
+        <div class="row"><span>Les 5 € sont déduits à l'achat d'une carte</span><span class="pr">5 €</span></div>
+        <h4>Tarifs classiques</h4>
+        <div class="row"><span>Carte de 10 leçons</span><span class="pr">75 €</span></div>
+        <div class="row"><span>À l'unité</span><span class="pr">8 € <small>/ leçon</small></span></div>
+        <h4>Tarif préférentiel Zumba Gold</h4>
+        <div class="row"><span>Carte de 10 leçons</span><span class="pr">55 €</span></div>
+        <div class="row"><span>À l'unité</span><span class="pr">6 € <small>/ leçon</small></span></div>
+        <h4>Full Access Fitness</h4>
+        <div class="row"><span>Accès à tous les cours de danse aussi</span><span class="pr">55 € <small>/ mois*</small></span></div>
+      </article>
+    </div>
+    <p class="fine rv" style="--i:5">* Voir conditions à l'accueil.</p>
+  </div>
+</section>
+
+<section class="sec dates" id="dates">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="kicker rv" style="--i:0">La saison</p>
+      <h2 class="t2 rv" style="--i:1">Dates à retenir.</h2>
+      <p class="closing rv" style="--i:2">Une saison de danse, de partage et d'émotions.</p>
+    </div>
+    <ol class="timeline">
+      <li class="ev rv" style="--i:1" data-date="2026-10-18"><div class="d"><b>18</b><span>octobre</span></div><div><h3>Zumba Party</h3><p>Avec Benjamin et Rodrigo</p></div></li>
+      <li class="ev rv" style="--i:2" data-date="2026-12-12"><div class="d"><b>12</b><span>décembre</span></div><div><h3>Gala de Noël</h3></div></li>
+      <li class="ev rv" style="--i:3" data-date="2026-12-13"><div class="d"><b>13</b><span>décembre</span></div><div><h3>Zumba Party</h3><p>Avec Alina Duma</p></div></li>
+      <li class="ev rv" style="--i:4" data-date="2027-02-06"><div class="d"><b>6</b><span>février</span></div><div><h3>Bal de Carnaval</h3></div></li>
+      <li class="ev rv" style="--i:5" data-date="2027-05-29"><div class="d"><b>29</b><span>mai</span></div><div><h3>Gala de fin d'année</h3></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec lieux" id="lieux">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker rv" style="--i:0">Où nous trouver</p>
+    <h2 class="t2 rv" style="--i:1">Près de chez vous.</h2>
+    <div class="venues">
+      <div class="venue rv" style="--i:1"><h3>Herstal</h3><div class="p">Wellness Post Hôtel<small>Aqua Zumba, le jeudi à 9h00</small></div><span class="new">Nouveau</span></div>
+      <div class="venue rv" style="--i:2"><h3>Ans</h3><div class="p">Hall omnisports de Loncin<small>Zumba Gold, le mercredi à 10h00</small></div><span class="new">Nouveau</span></div>
+      <div class="venue rv" style="--i:3"><h3>Fexhe-Slins</h3><div class="p">Salle La Concordia<small>Danse et Zumba Gold</small></div></div>
+      <div class="venue rv" style="--i:4"><h3>Liers</h3><div class="p">Centre culturel N. Thomsin<small>Danse, Zumba, Zumba Gold et Step</small></div></div>
+      <div class="venue rv" style="--i:5"><h3>Herstal</h3><div class="p">Hall omnisports La Préalle<small>Rue de la Préalle 1, 4040 Herstal</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <p class="kicker rv" style="--i:0">On vous répond</p>
+    <h2 class="t2 rv" style="--i:1">Les questions qu'on nous pose.</h2>
+    <div style="margin-top:2rem">
+      <details class="qa rv" style="--i:1"><summary>Je n'ai jamais dansé. Est-ce que ça ira ?</summary><p>Oui. Les cours sont ouverts à tous les niveaux, et on commence là où vous en êtes. Tout le monde est là pour bouger et sourire.</p></details>
+      <details class="qa rv" style="--i:2"><summary>Quels cours pour mon enfant ?</summary><p>Il y en a par âge : Baby Dance dès 3 ans, Zumba Kids dès 6 ans, mais aussi de la danse classique, du Ragga et du Girly pour les enfants. Regardez les horaires, ou écrivez-nous et on vous dit quel cours essayer en premier.</p></details>
+      <details class="qa rv" style="--i:3"><summary>Combien ça coûte ?</summary><p>Il y a l'assurance et l'inscription de 25 € par an, puis un tarif selon le nombre de cours. Tout est dans la section Tarifs.</p></details>
+      <details class="qa rv" style="--i:4"><summary>Je peux payer en plusieurs fois ?</summary><p>Oui. Les cours de danse se paient en 3 fois.</p></details>
+      <details class="qa rv" style="--i:5"><summary>Et si je ne peux pas venir chaque semaine ?</summary><p>Au fitness, la carte de 10 leçons se prend à votre rythme.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec essai" id="essai">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker rv" style="--i:0;justify-content:center">Cours d'essai</p>
+    <h2 class="t2 rv" style="--i:1">Votre tour.</h2>
+    <p class="lede rv" style="--i:2">Dites-nous qui danse et quel cours vous tente. On vous répond vite.</p>
+    <div class="cta-row rv" style="--i:3">
+      <a class="btn" href="https://wa.me/32498459034?text=Bonjour%20Flashdance%2C%20je%20voudrais%20r%C3%A9server%20un%20cours%20d%27essai." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.5z"/></svg>Écrire sur WhatsApp</a>
+      <a class="btn alt" href="mailto:info@flashdance.be?subject=Cours%20d%27essai&body=Bonjour%20Flashdance%2C%0A%0AJe%20voudrais%20r%C3%A9server%20un%20cours%20d%27essai.%0A%0AQui%20va%20danser%20%3A%20%0ALe%20cours%20qui%20me%20tente%20%3A%20%0A%0AMerci%20!"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Envoyer un e-mail</a>
+    </div>
+    <div class="contact rv" style="--i:4">
+      <a href="tel:+32498459034">0498 45 90 34</a>
+      <a href="mailto:info@flashdance.be">info@flashdance.be</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <a class="logo" href="#top"><b>FD</b> Flashdance</a>
+      <p style="margin-top:.6rem">Dansez. Vivez. Brillez.</p>
+    </div>
+    <div>
+      <p class="mono" style="margin-bottom:.6rem">Contact</p>
+      <ul><li><a href="tel:+32498459034">0498 45 90 34</a></li><li><a href="mailto:info@flashdance.be">info@flashdance.be</a></li></ul>
+    </div>
+    <div>
+      <p class="mono" style="margin-bottom:.6rem">Réseaux</p>
+      <ul><li><a href="https://www.facebook.com/EcoleFlashdance" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/ecoleflashdance/" target="_blank" rel="noopener">Instagram</a></li></ul>
+    </div>
+  </div>
+  <div class="legal"><span>© Flashdance</span></div>
+</footer>
+
+<noscript><style>.sec .rv{opacity:1!important;transform:none!important}.prof{opacity:1!important;transform:none!important}</style></noscript>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+'use strict';
+
+var clamp=function(v,lo,hi){return Math.min(hi,Math.max(lo,v))};
+var smoothstep=function(p,e0,e1){var t=clamp((p-e0)/(e1-e0),0,1);return t*t*(3-2*t)};
+function rng(seed){var s=seed>>>0;return function(){return (s=(s*1664525+1013904223)>>>0)/4294967296}}
+
+/* ---------- the static-hero gate (reduced motion), identical to the CSS media query ---------- */
+var GATES=[
+  '(prefers-reduced-motion: reduce)'
+];
+var MQLS=GATES.map(function(q){return matchMedia(q)});
+var RM=matchMedia('(prefers-reduced-motion: reduce)');
+
+/* ---------- text splitting (once, seeded) ---------- */
+var bands=[].slice.call(document.querySelectorAll('.band')).map(function(el,idx){
+  var mode=el.dataset.mode,a=parseFloat(el.dataset.a),b=parseFloat(el.dataset.b);
+  var ramp=parseFloat(el.dataset.ramp)||Math.min(0.025,(b-a)*0.35);
+  var h=el.querySelector('[data-split]'),r=rng(7919*(idx+3));
+  var text=h.textContent.trim();
+  h.textContent='';
+  var sr=document.createElement('span');sr.className='sr';sr.textContent=text;h.appendChild(sr);
+  var vis=document.createElement('span');vis.className='vis';vis.setAttribute('aria-hidden','true');h.appendChild(vis);
+  el.classList.add('m-'+mode);
+  if(mode==='blur'){
+    var s1=document.createElement('span');s1.className='soft';s1.textContent=text;
+    var s2=document.createElement('span');s2.className='sharp';s2.textContent=text;
+    vis.appendChild(s1);vis.appendChild(s2);
+  }else{
+    var words=text.split(' '),total=words.length,ci=0,chars=text.replace(/ /g,'').length;
+    words.forEach(function(w,wi){
+      var ws=document.createElement('span');ws.className='w';
+      if(mode==='scatter'){
+        for(var i=0;i<w.length;i++){
+          var c=document.createElement('span');c.className='c';c.textContent=w[i];
+          c.style.setProperty('--th',(r()*0.55).toFixed(3));
+          c.style.setProperty('--jx',Math.round((r()-.5)*160)+'px');
+          c.style.setProperty('--jy',Math.round((r()-.5)*120)+'px');
+          c.style.setProperty('--jr',Math.round((r()-.5)*50)+'deg');
+          ws.appendChild(c);ci++;
+        }
+      }else{
+        ws.textContent=w;
+        ws.style.setProperty('--th',(wi/total*0.5+r()*0.05).toFixed(3));
+      }
+      vis.appendChild(ws);
+      if(mode==='scatter'&&wi<total-1){var sp=document.createElement('span');sp.className='sp';vis.appendChild(sp)}
+      else if(mode!=='scatter'&&wi<total-1){vis.appendChild(document.createTextNode(' '))}
+    });
+  }
+  return {el:el,a:a,b:b,ramp:ramp,mode:mode,op:-1,k:-1,on:false,cta:el.querySelector('.btn')};
+});
+
+/* ---------- hero scrub engine ---------- */
+var hero=document.getElementById('top'),stage=document.getElementById('stage');
+var video=document.getElementById('hero-video'),poster=document.getElementById('poster'),ring=document.getElementById('ring');
+var VIDEO_URL='assets/hero-scrub.mp4',VIDEO_BYTES=4585935;
+var target=0,shown=0,rafId=null,lastTick=0,heroOnScreen=true,scrubOn=false,initDone=false;
+var seekBusy=false,pendingTime=null,loadK=0,loadStart=0,loadRaf=null;
+
+function heroProgress(){
+  var rect=hero.getBoundingClientRect();
+  var range=hero.offsetHeight-innerHeight;
+  if(range<=0)return 0;
+  return clamp(-rect.top/range,0,1);
+}
+function requestSeek(t){
+  if(!video.duration)return;
+  if(seekBusy){pendingTime=t;return}
+  seekBusy=true;video.currentTime=t;
+}
+video.addEventListener('seeked',function(){
+  seekBusy=false;
+  if(pendingTime!==null){var t=pendingTime;pendingTime=null;requestSeek(t)}
+});
+video.addEventListener('error',function(){seekBusy=false;pendingTime=null;failVideo()});
+
+function updateBands(p){
+  for(var i=0;i<bands.length;i++){
+    var B=bands[i],f=Math.min(0.02,(B.b-B.a)/3);
+    var inFade=i===0?1:smoothstep(p,B.a,B.a+f);
+    var outFade=i===bands.length-1?1:1-smoothstep(p,B.b-f,B.b);
+    var op=Math.round(inFade*outFade*100)/100;
+    var k=clamp((p-B.a)/B.ramp,0,1);
+    if(i===0)k=Math.max(k,loadK);
+    k=Math.round(k/0.008)*0.008;
+    if(op!==B.op){B.op=op;B.el.style.opacity=op;var on=op>0.01;if(on!==B.on){B.on=on;B.el.classList.toggle('vis-on',on)}}
+    if(k!==B.k){B.k=k;B.el.style.setProperty('--k',k.toFixed(3))}
+  }
+  if(stage.classList.contains('video-failed')){stage.classList.toggle('late',p>0.62)}
+}
+function tick(now){
+  var dt=Math.min(100,now-(lastTick||now));lastTick=now;
+  var k=0.16;
+  shown+=(target-shown)*(1-Math.pow(1-k,dt/16.667));
+  if(Math.abs(target-shown)<0.0005){shown=target;rafId=null;lastTick=0}
+  else{rafId=requestAnimationFrame(tick)}
+  requestSeek(shown*(video.duration||0));
+  updateBands(shown);
+}
+function onScroll(){
+  target=heroProgress();
+  if(rafId===null&&heroOnScreen)rafId=requestAnimationFrame(tick);
+}
+new IntersectionObserver(function(es){
+  heroOnScreen=es[0].isIntersecting;
+  if(heroOnScreen)onScroll();
+},{rootMargin:'100px'}).observe(hero);
+
+/* first band opens settled: a one-time load ramp hands over to scroll */
+function runLoadRamp(){
+  loadStart=performance.now();
+  (function step(now){
+    var t=clamp((now-loadStart)/1500,0,1);
+    loadK=1-Math.pow(1-t,3);
+    updateBands(shown);
+    if(t<1)loadRaf=requestAnimationFrame(step);else loadRaf=null;
+  })(loadStart);
+}
+
+function failVideo(){
+  stage.classList.add('video-failed');
+  stage.classList.remove('video-ready');
+}
+async function loadHeroBlob(){
+  var ctrl=new AbortController();
+  var watchdog=setTimeout(function(){ctrl.abort()},20000);
+  var res=await fetch(VIDEO_URL,{priority:'low',signal:ctrl.signal});
+  if(!res.ok)throw new Error('video '+res.status);
+  var total=Number(res.headers.get('Content-Length'))||VIDEO_BYTES;
+  var reader=res.body.getReader(),chunks=[],got=0,lastRing=0;
+  for(;;){
+    var r=await reader.read();
+    if(r.done)break;
+    clearTimeout(watchdog);watchdog=setTimeout(function(){ctrl.abort()},20000);
+    chunks.push(r.value);got+=r.value.length;
+    var frac=Math.min(1,got/total),now=performance.now();
+    if(now-lastRing>100||frac===1){lastRing=now;ring.style.setProperty('--ld',Math.round(126*(1-frac)))}
+  }
+  clearTimeout(watchdog);
+  ring.style.setProperty('--ld',0);
+  video.src=URL.createObjectURL(new Blob(chunks,{type:'video/mp4'}));
+  video.load();
+  video.addEventListener('canplay',function(){
+    function ready(){requestSeek(heroProgress()*video.duration);stage.classList.add('video-ready')}
+    /* a muted play/pause wakes the decoder on iOS so the first scrubbed frame paints */
+    var pp;try{pp=video.play()}catch(e){}
+    if(pp&&pp.then)pp.then(function(){video.pause();ready()}).catch(ready);else ready();
+  },{once:true});
+}
+function initHeroOnce(){
+  if(initDone)return;initDone=true;
+  poster.style.backgroundImage="url('assets/hero-poster.jpg')";
+  var started=false;
+  function start(){if(started)return;started=true;loadHeroBlob().catch(failVideo)}
+  var img=new Image();img.onload=start;img.onerror=start;img.src='assets/hero-poster.jpg';
+  setTimeout(start,4000);
+}
+function enableScrub(){
+  if(scrubOn)return;scrubOn=true;
+  initHeroOnce();
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  bands.forEach(function(b){b.op=-1;b.k=-1});
+  unpinFinalStates();
+  shown=target=heroProgress();
+  if(!loadRaf&&loadK<1)runLoadRamp();else updateBands(shown);
+  onScroll();
+}
+function disableScrub(){
+  if(!scrubOn)return;scrubOn=false;
+  removeEventListener('scroll',onScroll);
+  removeEventListener('resize',onScroll);
+  if(rafId!==null){cancelAnimationFrame(rafId);rafId=null}
+}
+function applyHeroMode(){
+  if(GATES.some(function(q){return matchMedia(q).matches}))disableScrub();else enableScrub();
+}
+MQLS.forEach(function(m){m.addEventListener('change',applyHeroMode)});
+
+/* ---------- nav ---------- */
+var nav=document.getElementById('nav'),burger=document.getElementById('burger');
+burger.addEventListener('click',function(){
+  var open=nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded',open?'true':'false');
+  burger.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+});
+document.getElementById('menu').addEventListener('click',function(e){
+  if(e.target.closest('a')){nav.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.focus()}});
+
+/* ---------- reveal entrances ---------- */
+var secIO=new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(en.isIntersecting){
+      var s=en.target;s.classList.add('in');secIO.unobserve(s);
+      setTimeout(function(){s.classList.add('done')},1800);
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+[].forEach.call(document.querySelectorAll('.sec'),function(s){secIO.observe(s)});
+
+/* ---------- horaires ---------- */
+var SLOTS=[
+ ['Lundi','Liers','Centre culturel N. Thomsin','18:00','Zumba Kids','+6 ans','danse'],
+ ['Lundi','Liers','Centre culturel N. Thomsin','19:00','Zumba','','fitness'],
+ ['Lundi','Liers','Centre culturel N. Thomsin','20:00','Dancehall','ados/adultes','danse'],
+ ['Lundi','Fexhe-Slins','Salle La Concordia','11:00','Zumba Gold','','fitness'],
+ ['Mardi','Fexhe-Slins','Salle La Concordia','17:30','Ragga','+6 ans','danse'],
+ ['Mardi','Fexhe-Slins','Salle La Concordia','18:30','Ragga','ados','danse'],
+ ['Mardi','Fexhe-Slins','Salle La Concordia','19:30','Commercial','ados/adultes','danse'],
+ ['Mardi','Fexhe-Slins','Salle La Concordia','20:30','Girly Heels','+16 ans','danse'],
+ ['Mercredi','Ans','Hall omnisports de Loncin','10:00','Zumba Gold','','fitness'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','14:00','Baby Dance','3-5 ans','danse'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','15:00','Starmoves','+6 ans','danse'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','16:00','Jazz / Contempo','+6 ans','danse'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','17:00','Contempo','+10 ans','danse'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','18:00','Zumba Gold','','fitness'],
+ ['Mercredi','Fexhe-Slins','Salle La Concordia','18:00','Hip Hop','+10 ans','danse'],
+ ['Mercredi','Liers','Centre culturel N. Thomsin','19:00','Zumba','','fitness'],
+ ['Mercredi','Fexhe-Slins','Salle La Concordia','19:30','Hip Hop','ados','danse'],
+ ['Jeudi','Herstal','Wellness Post Hôtel','09:00','Aqua Zumba','','fitness'],
+ ['Jeudi','Liers','Centre culturel N. Thomsin','17:00','Baby Dance','3-5 ans','danse'],
+ ['Jeudi','Fexhe-Slins','Salle La Concordia','17:30','Ragga','+10 ans','danse'],
+ ['Jeudi','Liers','Centre culturel N. Thomsin','18:00','Commercial','+6 ans','danse'],
+ ['Jeudi','Herstal','Hall omnisports La Préalle','18:00','Commercial','+6 ans','danse'],
+ ['Jeudi','Fexhe-Slins','Salle La Concordia','18:30','Commercial','+10 ans','danse'],
+ ['Jeudi','Liers','Centre culturel N. Thomsin','19:00','Step','','fitness'],
+ ['Jeudi','Herstal','Hall omnisports La Préalle','19:00','Starmoves','adultes','danse'],
+ ['Vendredi','Liers','Centre culturel N. Thomsin','17:00','Classique','enfants','danse'],
+ ['Samedi','Herstal','Hall omnisports La Préalle','10:00','Ragga','enfants','danse'],
+ ['Samedi','Herstal','Hall omnisports La Préalle','10:00','Zumba + Lift','','fitness'],
+ ['Samedi','Herstal','Hall omnisports La Préalle','11:00','Girly','enfants','danse'],
+ ['Samedi','Herstal','Hall omnisports La Préalle','11:00','Zumba','','fitness']
+];
+var DAYS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+var VILLES=['Toutes','Liers','Fexhe-Slins','Herstal','Ans'],TYPES=[['tous','Tout'],['danse','Danse'],['fitness','Fitness']];
+var fVille='Toutes',fType='tous';
+var daysEl=document.getElementById('days'),fv=document.getElementById('f-ville'),ft=document.getElementById('f-type');
+function mkChip(label,group,val){
+  var b=document.createElement('button');b.type='button';b.className='fchip';b.textContent=label;b.dataset.val=val;
+  b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',function(){
+    if(group==='v')fVille=val;else fType=val;
+    syncChips();renderDays();
+  });
+  return b;
+}
+VILLES.forEach(function(v){fv.appendChild(mkChip(v,'v',v))});
+TYPES.forEach(function(t){ft.appendChild(mkChip(t[1],'t',t[0]))});
+function syncChips(){
+  [].forEach.call(fv.children,function(c){c.setAttribute('aria-pressed',c.dataset.val===fVille?'true':'false')});
+  [].forEach.call(ft.children,function(c){c.setAttribute('aria-pressed',c.dataset.val===fType?'true':'false')});
+}
+function renderDays(){
+  daysEl.textContent='';
+  var any=false;
+  DAYS.forEach(function(d){
+    var list=SLOTS.filter(function(s){return s[0]===d&&(fVille==='Toutes'||s[1]===fVille)&&(fType==='tous'||s[6]===fType)})
+      .sort(function(a,b){return a[3]<b[3]?-1:a[3]>b[3]?1:0});
+    if(!list.length)return;
+    any=true;
+    var box=document.createElement('article');box.className='day';
+    var h=document.createElement('h3');h.textContent=d;box.appendChild(h);
+    list.forEach(function(s){
+      var row=document.createElement('div');row.className='slot';
+      var t=document.createElement('span');t.className='t';t.textContent=s[3].replace(':','h');
+      var n=document.createElement('span');n.className='n';n.textContent=s[4]+(s[5]?' ('+s[5]+')':'');
+      var m=document.createElement('span');m.className='m';m.textContent=s[1]+', '+s[2];
+      row.appendChild(t);row.appendChild(n);row.appendChild(m);box.appendChild(row);
+    });
+    box.appendChild(Object.assign(document.createElement('div'),{style:'height:8px'}));
+    daysEl.appendChild(box);
+  });
+  if(!any){
+    var e=document.createElement('p');e.className='empty';
+    e.textContent="Pas de cours avec ce choix. Essayez une autre ville ou un autre type, ou écrivez-nous.";
+    daysEl.appendChild(e);
+  }
+}
+syncChips();renderDays();
+
+/* ---------- dates: tag the ones already past ---------- */
+(function(){
+  var today=new Date();today.setHours(0,0,0,0);
+  [].forEach.call(document.querySelectorAll('.ev'),function(li){
+    var d=new Date(li.dataset.date+'T00:00:00');
+    if(d<today){
+      li.classList.add('past');
+      var tag=document.createElement('span');tag.className='tag';tag.textContent='Passé';
+      li.querySelector('h3').appendChild(tag);
+    }
+  });
+})();
+
+/* ---------- the one interactive moment: hold to light the room ---------- */
+var team=document.getElementById('equipe'),hold=document.getElementById('hold'),holdLabel=document.getElementById('hold-label'),holdAlt=document.getElementById('hold-alt');
+var hp=0,holding=false,holdRaf=null,holdLast=0,holdAuto=false,lit=false;
+function setHold(v){hp=clamp(v,0,1);hold.style.setProperty('--hp',hp.toFixed(3))}
+function lightUp(auto){
+  if(lit)return;lit=true;holdAuto=!!auto;
+  team.classList.add('lit');hold.dataset.done='1';
+  holdLabel.textContent='La salle est allumée';setHold(1);
+}
+function dim(){
+  lit=false;holdAuto=false;team.classList.remove('lit');hold.dataset.done='0';
+  holdLabel.textContent='Maintenez pour allumer la salle';setHold(0);
+}
+function holdTick(now){
+  var dt=Math.min(100,now-(holdLast||now));holdLast=now;
+  if(lit){holdRaf=null;holdLast=0;return}
+  if(holding)setHold(hp+dt/1500);
+  else setHold(hp-dt/700*Math.max(.35,hp));
+  if(hp>=1){lightUp(false);holdRaf=null;holdLast=0;return}
+  if(!holding&&hp<=0.001){setHold(0);holdRaf=null;holdLast=0;return}
+  holdRaf=requestAnimationFrame(holdTick);
+}
+function holdStart(){if(lit)return;holding=true;if(holdRaf===null)holdRaf=requestAnimationFrame(holdTick)}
+function holdEnd(){holding=false;if(!lit&&holdRaf===null&&hp>0)holdRaf=requestAnimationFrame(holdTick)}
+hold.addEventListener('pointerdown',function(e){e.preventDefault();try{hold.setPointerCapture(e.pointerId)}catch(_){}holdStart()});
+hold.addEventListener('pointerup',holdEnd);
+hold.addEventListener('pointercancel',holdEnd);
+hold.addEventListener('keydown',function(e){if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();holdStart()}});
+hold.addEventListener('keyup',function(e){if(e.key===' '||e.key==='Enter')holdEnd()});
+hold.addEventListener('blur',holdEnd);
+hold.addEventListener('contextmenu',function(e){e.preventDefault()});
+holdAlt.addEventListener('click',function(){lightUp(false)});
+
+/* ---------- self-drawing ribbon ---------- */
+var draw=document.getElementById('draw1'),path=draw.querySelector('path'),plen=path.getTotalLength(),drawSec=document.getElementById('cours'),lastDraw=-1,drawPinned=false,drawOn=false;
+path.style.strokeDasharray=plen;path.style.strokeDashoffset=plen;
+function updateDraw(){
+  if(drawPinned)return;
+  var r=drawSec.getBoundingClientRect();
+  var p=clamp((innerHeight*0.85-r.top)/(r.height*0.7),0,1);
+  p=Math.round(p*100)/100;
+  if(p!==lastDraw){lastDraw=p;path.style.strokeDashoffset=(plen*(1-p)).toFixed(1)}
+}
+new IntersectionObserver(function(es){
+  drawOn=es[0].isIntersecting;
+  if(drawOn){addEventListener('scroll',updateDraw,{passive:true});updateDraw()}
+  else removeEventListener('scroll',updateDraw);
+},{rootMargin:'120px'}).observe(drawSec);
+
+/* ---------- reduced motion, honored live in both directions ---------- */
+function pinToFinalStates(){
+  drawPinned=true;path.style.strokeDashoffset=0;
+  if(!lit)lightUp(true);
+  [].forEach.call(document.querySelectorAll('.sec'),function(s){s.classList.add('in','done')});
+}
+function unpinFinalStates(){
+  drawPinned=false;lastDraw=-1;updateDraw();
+  if(lit&&holdAuto)dim();
+}
+function onRM(){
+  if(RM.matches)pinToFinalStates();
+  else{unpinFinalStates();}
+  applyHeroMode();
+}
+RM.addEventListener('change',onRM);
+if(RM.matches)pinToFinalStates();
+applyHeroMode();
+
+/* pause every loop on hidden tabs */
+document.addEventListener('visibilitychange',function(){document.body.classList.toggle('paused',document.hidden)});
+})();
+</script>
+<style>body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}</style>
+</body>
+</html>
